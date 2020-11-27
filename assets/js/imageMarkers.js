@@ -11,6 +11,10 @@ $(document).ready(function () {
                 newSettings = json,
                 that = this;
 
+            this.click(() => {
+                $('.' + settings.markerFormClass).hide();
+            })
+
             var imageWrapperClass = prepareClass(settings.imageWrapperClass, newSettings.imageWrapperClass)
 
             this.wrap('<div class="' + imageWrapperClass + '"></div>');
@@ -32,10 +36,6 @@ $(document).ready(function () {
                     'click': function () {
                         $('.' + settings.markerFormClass + '[data-marker-number = "' + $(this).attr('data-marker') + '"]').show();
                         checkFormPos($('.' + settings.markerFormClass + '[data-marker-number = "' + $(this).attr('data-marker') + '"]'), x, y);
-
-                        that.click(() => {
-                            $('.' + settings.markerFormClass + '[data-marker-number = "' + $(this).attr('data-marker') + '"]').hide();
-                        })
                     }
                 });
 
