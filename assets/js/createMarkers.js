@@ -242,8 +242,7 @@ class ImageMarkers {
                 break;
         }*/
         input.change(() => {
-            this.json[input.closest('.markerForm').attr('data-marker-number')].text = input.val();
-            console.log(this.json);
+            this.json[input.closest('.markerForm').attr('data-marker-number')].text = encodeURIComponent(input.val());
         })
 
         select.next().empty();

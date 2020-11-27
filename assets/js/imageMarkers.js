@@ -54,7 +54,7 @@ $(document).ready(function () {
                         'top': y + '%',
                     },
                     append: $('<div>', {
-                        'html': text
+                        'html': decodeURIComponent(text)
                     })
                 });
 
