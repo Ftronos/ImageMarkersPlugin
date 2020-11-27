@@ -48,23 +48,52 @@
     background: #fff;
     border: 2px solid #000;
     display: none;
+    z-index: 1;
 }
 
-.markerFormSelect,
-.markerFormInputWrapper input,
-.markerFormInputWrapper textarea {
-    width: 100%;
-    margin-bottom: 5px;
+.marker:before {
+    content: '';
+    border: 5px solid #fff601;
+    background: transparent;
+    border-radius: 30px;
+    height: 30px;
+    width: 30px;
+    -webkit-animation: pulse 3s ease-out;
+    animation: pulse 3s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    opacity: 0;
+    transform: translate(-50%, -50%);
 }
 
-.showJson {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #333;
-    color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 5px 5px 3px #333;
+
+@keyframes pulse {
+    0 {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: .0;
+    }
+
+    25% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: .1;
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(0.1);
+        opacity: .3;
+    }
+
+    75% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: .5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: .0;
+    }
 }
