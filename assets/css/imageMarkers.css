@@ -47,8 +47,15 @@
     padding: 20px 10px;
     background: #fff;
     border: 2px solid #000;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     z-index: 1;
+    transition: opacity .5s, visibility .5s;
+}
+
+.markerForm_active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .marker:before {

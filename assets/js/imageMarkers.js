@@ -6,13 +6,14 @@ $(document).ready(function () {
                     imageWrapperClass: 'imageWrapper',
                     markerClass: 'marker',
                     markerFormClass: 'markerForm',
+                    markerFormActiveClass: 'markerForm_active',
                     markers: [],
                 },
                 newSettings = json,
                 that = this;
 
             this.click(() => {
-                $('.' + settings.markerFormClass).hide();
+                $('.' + settings.markerFormClass).removeClass(settings.markerFormActiveClass);
             })
 
             var imageWrapperClass = prepareClass(settings.imageWrapperClass, newSettings.imageWrapperClass)
@@ -34,8 +35,10 @@ $(document).ready(function () {
                     },
                     'data-marker': markerCounter,
                     'click': function () {
-                        $('.' + settings.markerFormClass + '[data-marker-number = "' + $(this).attr('data-marker') + '"]').show();
-                        checkFormPos($('.' + settings.markerFormClass + '[data-marker-number = "' + $(this).attr('data-marker') + '"]'), x, y);
+                        var form = $('.' + settings.markerFormClass + '[data-marker-number = "' + $(this).attr('data-marker') + '"]');
+
+                        form.addClass(settings.markerFormActiveClass);
+                        checkFormPos(form, x, y);
                     }
                 });
 
@@ -58,10 +61,18 @@ $(document).ready(function () {
                     })
                 });
 
+
                 form.appendTo(that.closest('.' + settings.imageWrapperClass));
             }
 
             function checkFormPos(f, x, y) {
+                f.css({
+                    'left': x + '%',
+                    'top': y + '%',
+                    'right': 'auto',
+                    'bottom': 'auto',
+                })
+
                 if (f.position().left + f.outerWidth() > $('.' + settings.imageWrapperClass).outerWidth()) {
                     f.css({
                         'left': 'auto',
@@ -74,23 +85,23 @@ $(document).ready(function () {
                     })
                 }
 
-                if (f.position().top + f.outerHeight() > $('.' + settings.imageWrapperClass).outerHeight()) {
-                    f.css({
-                        'top': 'auto',
-                        'bottom': 100 - y + '%',
-                    })
-                } else {
-                    f.css({
-                        'top': y + '%',
-                        'bottom': 'auto',
-                    })
-                }
+                 if (f.position().top + f.outerHeight() > $('.' + settings.imageWrapperClass).outerHeight()) {
+                     f.css({
+                         'top': 'auto',
+                         'bottom': 100 - y + '%',
+                     })
+                 } else {
+                     f.css({
+                         'top': y + '%',
+                         'bottom': 'auto',
+                     })
+                 }
             }
 
             function prepareClass(a, b) {
                 var d = a;
 
-                if (b && typeof b === 'string' ) {
+                if (b && typeof b === 'string') {
                     if (b.indexOf(',')) {
                         var c = b.split(',');
                         var e = '';
