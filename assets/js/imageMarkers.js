@@ -69,7 +69,7 @@ $(document).ready(function () {
                     })
                 } else {
                     f.css({
-                        'left': 'x' + '%',
+                        'left': x + '%',
                         'right': 'auto',
                     })
                 }
@@ -81,7 +81,7 @@ $(document).ready(function () {
                     })
                 } else {
                     f.css({
-                        'top': 'x' + '%',
+                        'top': y + '%',
                         'bottom': 'auto',
                     })
                 }
