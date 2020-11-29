@@ -51,6 +51,14 @@
     visibility: hidden;
     z-index: 1;
     transition: opacity .5s, visibility .5s;
+    max-width: 200px;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.markerForm * {
+    max-width: 100%;
 }
 
 .markerForm_active {

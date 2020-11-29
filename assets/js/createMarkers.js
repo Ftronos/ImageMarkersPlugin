@@ -76,12 +76,6 @@ class ImageMarkers {
         };
 
         this.markerTypes = {
-            /*'link': {
-                html: $('<input>', {
-                    'placeholder': 'Вставьте ссылку',
-                }),
-                name: 'Ссылка'
-            },*/
             'text': {
                 name: 'Текст html',
                 tag: '<textarea>',
@@ -89,12 +83,14 @@ class ImageMarkers {
                     'placeholder': 'Вставьте Текст (html)',
                 },
             },
-            /*'string': {
-                html: $('<input>', {
-                    'placeholder': 'Напишите строку',
-                }),
-                name: 'Строка'
-            }*/
+            'image': {
+              name: 'Изображение',
+              tag: '<input>',
+              tagConfig: {
+                'type': 'text',
+                'placeholder': 'Вставьте ссылку на изображение',
+              },
+            },
         };
         this.markerCounter = 0;
         this.json = {};

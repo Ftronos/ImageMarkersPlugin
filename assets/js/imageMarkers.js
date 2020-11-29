@@ -12,6 +12,17 @@ $(document).ready(function () {
                 newSettings = json,
                 that = this;
 
+            var markerTypes = {
+              'text': {
+                tag: '<div>',
+                tagConfig: {},
+              },
+              'image': {
+                tag: '<img>',
+                tagConfig: {},
+              },
+            };
+
             this.click(() => {
                 $('.' + settings.markerFormClass).removeClass(settings.markerFormActiveClass);
             })
@@ -24,7 +35,7 @@ $(document).ready(function () {
                 createMarkerOnImage(item.posX, item.posY, i, item.type, item.text)
             })
 
-            function createMarkerOnImage(x, y, markerCounter, type, text) {
+            function createMarkerOnImage(x, y, markerCounter, type, html) {
                 var markerClass = prepareClass(settings.markerClass, newSettings.markerClass);
 
                 var marker = $('<div>', {
@@ -42,11 +53,11 @@ $(document).ready(function () {
                     }
                 });
 
-                createDescriptionForm(x, y, markerCounter, type, text);
+                createDescriptionForm(x, y, markerCounter, type, html);
                 marker.appendTo(that.closest('.' + settings.imageWrapperClass));
             }
 
-            function createDescriptionForm(x, y, markerNumber, type, text) {
+            function createDescriptionForm(x, y, markerNumber, type, html) {
                 var markerFormClass = prepareClass(settings.markerFormClass, newSettings.markerFormClass)
 
                 var form = $('<div>', {
@@ -56,13 +67,32 @@ $(document).ready(function () {
                         'left': x + '%',
                         'top': y + '%',
                     },
-                    append: $('<div>', {
-                        'html': decodeURIComponent(text)
-                    })
+                    append: createFormElem(type, html)
                 });
 
 
                 form.appendTo(that.closest('.' + settings.imageWrapperClass));
+            }
+
+            function createFormElem(type, html) {
+              html = decodeURIComponent(html);
+
+              var tag = markerTypes[type].tag,
+                config = markerTypes[type].tagConfig;
+
+              switch (type) {
+                case 'text':
+                  config['html'] = html;
+                  break;
+
+                case 'image':
+                  config['src'] = html;
+                  break;
+              }
+
+              console.log(config);
+
+              return $(tag, config);
             }
 
             function checkFormPos(f, x, y) {
